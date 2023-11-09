@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <div clas="notes_list_heading text-center mb-5">
+                <h1 class="fs-2">Notes:</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% for note in notes %}
+        <div class="col-md-4">
+            <div class="card m-2">
+                <div class="card-header">{{note.title}}</div>
+                <div class="card-body">
+                    <p>{{note.text|truncatechars:30}}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'notes.detail' pk=note.id %}" class="btn btn-info btn-sm">View note</a>
+                    <a href="{% url 'notes.update' pk=note.id %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'notes.delete' pk=note.id %}" class="btn btn-sm btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock%}
+
